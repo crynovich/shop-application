@@ -1,12 +1,10 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useEffect, useState } from 'react';
-import styles from './app.module.scss';
-
 import { Products } from './products/products';
 import { productsService } from './products/products.service';
 import { Product } from './products/products.models';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { Box, Stack, ThemeProvider, createTheme } from '@mui/material';
 import { blue, orange } from '@mui/material/colors';
+import { NavigationBar } from './navigation-bar/navigation-bar';
 
 const theme = createTheme({
   palette: {
@@ -31,7 +29,13 @@ export function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Products products={data} />
+      <Stack direction="column" className="h-full">
+        <NavigationBar />
+        <Box className="overflow-auto p-4">
+          {/* navigation goes here */}
+          <Products products={data} />
+        </Box>
+      </Stack>
     </ThemeProvider>
   );
 }

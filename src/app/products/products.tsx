@@ -8,7 +8,7 @@ interface ProductsProps {
 
 export function Products({ products }: ProductsProps) {
   return (
-    <Stack gap={2}>
+    <Stack direction="column" gap={2}>
       {products.map((product) => (
         <ProductListItem key={product.id} product={product} />
       ))}
