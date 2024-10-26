@@ -5,6 +5,19 @@ import styles from './app.module.scss';
 import { Products } from './products/products';
 import { productsService } from './products/products.service';
 import { Product } from './products/products.models';
+import { ThemeProvider, createTheme } from '@mui/material';
+import { blue, orange } from '@mui/material/colors';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: blue[800],
+    },
+    secondary: {
+      main: orange[500],
+    },
+  },
+});
 
 export function App() {
   const [data, setData] = useState<Product[]>([]);
@@ -16,7 +29,11 @@ export function App() {
     });
   }, []);
 
-  return <Products products={data} />;
+  return (
+    <ThemeProvider theme={theme}>
+      <Products products={data} />
+    </ThemeProvider>
+  );
 }
 
 export default App;
