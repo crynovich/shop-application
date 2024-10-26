@@ -18,7 +18,7 @@ export function ProductListItem({ product }: ProductListItemProps) {
   return (
     <Card variant="outlined">
       <Stack direction={'row'}>
-        <CardActionArea style={{ flex: '1 1 auto' }}>
+        <CardActionArea className="flex-auto">
           <CardContent>
             <Typography variant="h6" color="primary">
               {product.name}
@@ -28,7 +28,7 @@ export function ProductListItem({ product }: ProductListItemProps) {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions style={{ flex: '0 0 auto' }}>
+        <CardActions className="flex-none">
           <Button variant="outlined" size="small" color="primary">
             <Stack direction="row" alignItems="center" gap={1}>
               <AddShoppingCartIcon />
