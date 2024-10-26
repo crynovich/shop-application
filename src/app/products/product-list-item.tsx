@@ -15,7 +15,7 @@ interface ProductListItemProps {
 
 export function ProductListItem({ product }: ProductListItemProps) {
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" className="h-44">
       <CardContent className="h-full">
         <Stack
           className="h-full"

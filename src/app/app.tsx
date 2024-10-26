@@ -5,6 +5,7 @@ import { Product } from './products/products.models';
 import { Box, Stack, ThemeProvider, createTheme } from '@mui/material';
 import { blue, orange } from '@mui/material/colors';
 import { NavigationBar } from './navigation-bar/navigation-bar';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -28,15 +29,19 @@ export function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Stack direction="column" className="h-full">
-        <NavigationBar />
-        <Box className="overflow-auto p-4">
-          {/* navigation goes here */}
-          <Products products={data} />
-        </Box>
-      </Stack>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <Stack direction="column" className="h-full">
+          <NavigationBar />
+          <Box className="overflow-auto p-4">
+            <Routes>
+              <Route path="/" element={<Products products={data} />}></Route>
+              <Route path="/:productId" element={<div> hello </div>}></Route>
+            </Routes>
+          </Box>
+        </Stack>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
