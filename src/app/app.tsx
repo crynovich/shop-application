@@ -1,14 +1,22 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { useEffect, useState } from 'react';
 import styles from './app.module.scss';
 
-import NxWelcome from './nx-welcome';
+import { Products } from './products/products';
+import { productsService } from './products/products.service';
+import { Product } from './products/products.models';
 
 export function App() {
-  return (
-    <div>
-      <NxWelcome title="shop-application" />
-    </div>
-  );
+  const [data, setData] = useState<Product[]>([]);
+
+  useEffect(() => {
+    productsService.getProducts().then((data) => {
+      setData(data);
+      console.log({ data });
+    });
+  }, []);
+
+  return <Products products={data} />;
 }
 
 export default App;
