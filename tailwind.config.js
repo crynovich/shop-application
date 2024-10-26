@@ -10,6 +10,7 @@ module.exports = {
     ),
     ...createGlobPatternsForDependencies(__dirname),
   ],
+  // todo: match react mui breakpoints with tailwinds
   theme: {
     extend: {},
   },

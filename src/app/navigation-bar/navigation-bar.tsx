@@ -1,11 +1,4 @@
-import {
-  AppBar,
-  Badge,
-  Button,
-  IconButton,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { AppBar, Badge, IconButton, Toolbar, Typography } from '@mui/material';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 
 export function NavigationBar() {
@@ -17,7 +10,7 @@ export function NavigationBar() {
         </Typography>
 
         <IconButton size="large" color="inherit">
-          <Badge badgeContent={17} color="error">
+          <Badge badgeContent={17} color="secondary">
             <ShoppingCart />
           </Badge>
         </IconButton>

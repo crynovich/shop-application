@@ -1,9 +1,8 @@
 import {
-  Button,
   Card,
-  CardActionArea,
-  CardActions,
   CardContent,
+  IconButton,
+  Link,
   Stack,
   Typography,
 } from '@mui/material';
@@ -17,26 +16,46 @@ interface ProductListItemProps {
 export function ProductListItem({ product }: ProductListItemProps) {
   return (
     <Card variant="outlined">
-      <Stack direction={'row'}>
-        <CardActionArea className="flex-auto">
-          <CardContent>
-            <Typography variant="h6" color="primary">
-              {product.name}
-            </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+      <CardContent className="h-full">
+        <Stack
+          className="h-full"
+          direction="column"
+          justifyContent="space-between"
+          gap={1}
+        >
+          <Stack direction="column" gap={1}>
+            <Link href="/" underline="hover">
+              <Typography className="flex-none truncate" variant="h6">
+                {product.name}
+              </Typography>
+            </Link>
+            <Typography
+              className="flex-auto line-clamp-2"
+              variant="body2"
+              // todo: fix inline overrides
+              sx={{ color: 'text.secondary' }}
+            >
               {product.description}
             </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions className="flex-none">
-          <Button variant="outlined" size="small" color="primary">
-            <Stack direction="row" alignItems="center" gap={1}>
+          </Stack>
+
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            className="flex-none"
+          >
+            {/* hardcoded currency since the data is missing */}
+            <Typography className="truncate" variant="h6">
+              {product.price}€
+            </Typography>
+
+            <IconButton className="flex-none" size="large" color="secondary">
               <AddShoppingCartIcon />
-              Add to cart
-            </Stack>
-          </Button>
-        </CardActions>
-      </Stack>
+            </IconButton>
+          </Stack>
+        </Stack>
+      </CardContent>
     </Card>
   );
 }

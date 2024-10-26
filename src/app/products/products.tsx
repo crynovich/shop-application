@@ -1,6 +1,7 @@
 import { Stack } from '@mui/material';
 import { Product } from './products.models';
 import { ProductListItem } from './product-list-item';
+import Grid from '@mui/material/Grid2';
 
 interface ProductsProps {
   products: Product[];
@@ -8,10 +9,12 @@ interface ProductsProps {
 
 export function Products({ products }: ProductsProps) {
   return (
-    <Stack direction="column" gap={2}>
+    <Grid container spacing={2}>
       {products.map((product) => (
-        <ProductListItem key={product.id} product={product} />
+        <Grid size={{ sm: 6, md: 4, lg: 3 }}>
+          <ProductListItem key={product.id} product={product} />
+        </Grid>
       ))}
-    </Stack>
+    </Grid>
   );
 }

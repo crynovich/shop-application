@@ -12,7 +12,7 @@ const theme = createTheme({
       main: blue[800],
     },
     secondary: {
-      main: orange[500],
+      main: orange[900],
     },
   },
 });
