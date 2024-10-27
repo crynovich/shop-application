@@ -1,5 +1,23 @@
-export function ProductDetails() {
-  // todo: read the data from context based on the route id
+import { productsService } from '../products.service';
+import { useParams } from 'react-router-dom';
+import { ProductDetailsHeader } from './product-details-header';
+import { useGetData } from '../../shared/hooks/useGetData';
+import { Loading } from '../../shared/components/loading';
 
-  return <div>product details</div>;
+export function ProductDetails() {
+  const { productId } = useParams();
+
+  const { data, loading } = useGetData(
+    productsService.getProduct,
+    Number(productId)
+  );
+
+  if (loading) return <Loading />;
+
+  return (
+    <>
+      <ProductDetailsHeader id={data.id} name={data.name} price={data.price} />
+      <div>product details</div>
+    </>
+  );
 }

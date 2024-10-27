@@ -46,8 +46,8 @@ export function ProductListItem({
         >
           <Stack direction="column" gap={1}>
             <Link
+              component="button"
               onClick={() => handleProductClick(product.id)}
-              href="javascript:void(0)"
               underline="hover"
             >
               <Typography className="flex-none truncate" variant="h6">

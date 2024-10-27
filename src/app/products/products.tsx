@@ -1,15 +1,13 @@
-import { Product } from './products.models';
 import { ProductListItem } from './product-list-item';
 import Grid from '@mui/material/Grid2';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useGetData } from '../shared/hooks/useGetData';
+import { productsService } from './products.service';
+import { Loading } from '../shared/components/loading';
 
-interface ProductsProps {
-  // todo: read this from the context
-  products: Product[];
-}
-
-export function Products({ products }: ProductsProps) {
+export const Products = () => {
+  const { data: products, loading } = useGetData(productsService.getProducts);
   const navigate = useNavigate();
 
   const handleProductClick = useCallback(
@@ -22,6 +20,8 @@ export function Products({ products }: ProductsProps) {
   const handleAddToCartClick = useCallback((productId: number) => {
     // navigate(productId);
   }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <Grid container spacing={2}>
@@ -36,4 +36,4 @@ export function Products({ products }: ProductsProps) {
       ))}
     </Grid>
   );
-}
+};

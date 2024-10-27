@@ -14,11 +14,5 @@ interface AdditionalInformation {
 }
 
 interface Specifications {
-  DPI: number;
-  'Connection Type': string;
-  'Operating Range': string;
-  Battery: string;
-  Dimensions: string;
-  Weight: string;
-  Compatibility: string[];
+  [key: string]: number | string | string[];
 }
