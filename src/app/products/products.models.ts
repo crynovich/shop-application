@@ -4,15 +4,10 @@ export interface Product {
   price: number;
   description: string;
   features: string[];
-  specifications: Specifications;
-  additionalInformation: AdditionalInformation;
+  specifications: ProductInformation;
+  additionalInformation: ProductInformation;
 }
 
-interface AdditionalInformation {
-  Warranty: string;
-  'In the Box': string[];
-}
-
-interface Specifications {
+export interface ProductInformation {
   [key: string]: number | string | string[];
 }
