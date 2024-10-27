@@ -2,40 +2,67 @@ import {
   AppBar,
   Badge,
   Button,
+  Drawer,
   IconButton,
   Stack,
   Toolbar,
 } from '@mui/material';
-import ShoppingCart from '@mui/icons-material/ShoppingCart';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from 'react-router-dom';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
+import { Cart } from '../products/cart/cart';
 
 export function NavigationBar() {
   const navigate = useNavigate();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleDrawer = useCallback(
+    (newOpen: boolean) => () => {
+      setIsDrawerOpen(newOpen);
+    },
+    [setIsDrawerOpen]
+  );
 
   const handleAppClick = useCallback(() => {
     navigate('/');
   }, [navigate]);
 
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Stack
-          className="w-full"
-          direction="row"
-          justifyContent="space-between"
-        >
-          <Button color="inherit" onClick={handleAppClick}>
-            Shop Application
-          </Button>
+    <>
+      <AppBar position="static">
+        <Toolbar>
+          <Stack
+            className="w-full"
+            direction="row"
+            justifyContent="space-between"
+          >
+            <Button color="inherit" onClick={handleAppClick}>
+              Shop Application
+            </Button>
 
-          <IconButton size="large" color="inherit">
-            <Badge badgeContent={17} color="secondary">
-              <ShoppingCart />
-            </Badge>
-          </IconButton>
-        </Stack>
-      </Toolbar>
-    </AppBar>
+            <IconButton
+              size="large"
+              color="inherit"
+              onClick={toggleDrawer(true)}
+            >
+              <Badge badgeContent={17} color="secondary">
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
+          </Stack>
+        </Toolbar>
+      </AppBar>
+
+      <Drawer
+        anchor="right"
+        open={isDrawerOpen}
+        onClose={toggleDrawer(false)}
+        PaperProps={{
+          sx: { width: { xs: '100%', sm: '36rem' } },
+        }}
+      >
+        <Cart onCloseCartClick={toggleDrawer(false)} />
+      </Drawer>
+    </>
   );
 }
