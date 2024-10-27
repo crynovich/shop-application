@@ -9,6 +9,7 @@ import {
 import { Product } from './products.models';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useCallback } from 'react';
+import { EURO_SYMBOL } from '../shared/models/constants';
 
 interface ProductListItemProps {
   product: Product;
@@ -70,9 +71,9 @@ export function ProductListItem({
             justifyContent="space-between"
             className="flex-none"
           >
-            {/* hardcoded currency since the data is missing */}
             <Typography className="truncate" variant="h6">
-              {product.price}€
+              {product.price}
+              {EURO_SYMBOL}
             </Typography>
 
             <IconButton
