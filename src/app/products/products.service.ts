@@ -1,10 +1,10 @@
 import { Product } from './products.models';
 
 export const productsService = {
-  getProducts: (): Promise<Product[]> => {
-    return fetch(
-      'https://61898893be95487994abc2d8b4cf839e.api.mockbin.io/'
-    ).then((response) => response.json());
+  getProducts: async (): Promise<Product[]> => {
+    return (
+      await fetch('https://61898893be95487994abc2d8b4cf839e.api.mockbin.io/')
+    ).json();
   },
 
   // mocked implementation since the GET/{id} endpoint doesn't exist

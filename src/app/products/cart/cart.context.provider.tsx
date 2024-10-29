@@ -1,30 +1,37 @@
-import { ReactNode, useState } from 'react';
-import { Cart, CartItem, ProductInCart } from './cart.models';
+import { ReactNode, useEffect, useState } from 'react';
+import { Cart, ICartItem } from './cart.models';
 import { CartContext } from './cart.context';
+import { Product } from '../products.models';
 
 export const CartContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [cart, setCart] = useState<Cart>({});
 
-  // todo: figure out what's wrong with object.entries
-  const productsInCart: ProductInCart[] = Object.entries(cart).map(
-    ([key, value]) => ({
-      productId: +key,
-      price: 12,
-      quantity: (value as CartItem).quantity,
-    })
-  );
+  useEffect(() => {
+    console.log({ cart });
+  }, [cart]);
+
+  // todo: figure out what's wrong with this
+  const cartItems: ICartItem[] = Object.values(cart);
 
   // todo: useCallback on everything
   const isInCart = (productId: number) => {
     return !!cart[productId];
   };
 
-  const addProduct = (productId: number) => {
-    if (isInCart(productId)) return;
+  const addProduct = (product: Product) => {
+    if (isInCart(product.id)) return;
 
-    setCart((cart) => ({ ...cart, [productId]: { quantity: 1 } }));
+    setCart((cart) => ({
+      ...cart,
+      [product.id]: {
+        productId: product.id,
+        productName: product.name,
+        price: product.price,
+        quantity: 1,
+      },
+    }));
   };
 
   const removeProduct = (productId: number) => {
@@ -35,13 +42,16 @@ export const CartContextProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const changeQuantity = (productId: number, quantity: number) => {
-    setCart((cart) => ({ ...cart, [productId]: { quantity } }));
+    setCart((cart) => ({
+      ...cart,
+      [productId]: { ...cart[productId], quantity },
+    }));
   };
 
   return (
     <CartContext.Provider
       value={{
-        productsInCart,
+        cartItems,
         isInCart,
         addProduct,
         deleteProduct: removeProduct,

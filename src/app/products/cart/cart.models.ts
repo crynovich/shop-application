@@ -1,13 +1,10 @@
-export interface CartItem {
-  quantity: number;
-}
-
 export interface Cart {
-  [productId: number]: CartItem;
+  [productId: number]: ICartItem;
 }
 
-export interface ProductInCart {
+export interface ICartItem {
   productId: number;
-  quantity: number;
+  productName: string;
   price: number;
+  quantity: number;
 }

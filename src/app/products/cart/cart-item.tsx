@@ -1,10 +1,10 @@
 import { Card, IconButton, Stack, Typography } from '@mui/material';
 import { Counter } from '../../shared/components/counter';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { ProductInCart } from './cart.models';
+import { ICartProduct } from './cart';
 
 interface CartItemProps {
-  product: ProductInCart;
+  product: ICartProduct;
   onDeleteProductFromCart?: (productId: number) => void;
   onQuantityChange?: (productId: number, quantity: number) => void;
 }
@@ -40,7 +40,7 @@ export const CartItem = ({
           className="overflow-hidden"
         >
           <Stack direction="column" className="overflow-hidden">
-            <Typography className="truncate">{product.productId}</Typography>
+            <Typography className="truncate">{product.productName}</Typography>
             <Typography variant="caption">{product.price}</Typography>
           </Stack>
           <Counter

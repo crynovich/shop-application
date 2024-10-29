@@ -16,7 +16,7 @@ interface ProductListItemProps {
   product: Product;
   inCart?: boolean;
   onProductClick?: (productId: number) => void;
-  onAddToCartClick?: (productId: number) => void;
+  onAddToCartClick?: (product: Product) => void;
 }
 
 export function ProductListItem({
@@ -33,8 +33,8 @@ export function ProductListItem({
   );
 
   const handleAddToCartClick = useCallback(
-    (productId: number) => {
-      if (onAddToCartClick) onAddToCartClick(productId);
+    (product: Product) => {
+      if (onAddToCartClick) onAddToCartClick(product);
     },
     [onAddToCartClick]
   );
@@ -81,7 +81,8 @@ export function ProductListItem({
 
             {!inCart ? (
               <IconButton
-                onClick={() => handleAddToCartClick(product.id)}
+                // todo: fix this inline call
+                onClick={() => handleAddToCartClick(product)}
                 className="flex-none"
                 size="large"
                 color="secondary"

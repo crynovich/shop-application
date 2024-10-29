@@ -5,17 +5,14 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../cart/cart.context';
+import { Product } from '../products.models';
 
 interface ProductDetailsHeaderProps {
-  id: number;
-  name: string;
-  price: number;
+  product: Product;
 }
 
 export const ProductDetailsHeader = ({
-  id,
-  name,
-  price,
+  product,
 }: ProductDetailsHeaderProps) => {
   const { isInCart, addProduct } = useContext(CartContext);
 
@@ -26,8 +23,8 @@ export const ProductDetailsHeader = ({
   }, [navigate]);
 
   const handleAddToCartClick = useCallback(
-    (productId: number) => {
-      addProduct(productId);
+    (product: Product) => {
+      addProduct(product);
     },
     [addProduct]
   );
@@ -42,7 +39,7 @@ export const ProductDetailsHeader = ({
           </Button>
 
           <Typography variant="h5">
-            {name} | {price}
+            {product.name} | {product.price}
             {EURO_SYMBOL}
           </Typography>
         </Stack>
@@ -51,11 +48,11 @@ export const ProductDetailsHeader = ({
         <Button
           variant="outlined"
           color="secondary"
-          onClick={() => handleAddToCartClick(id)}
-          disabled={isInCart(id)}
+          onClick={() => handleAddToCartClick(product)}
+          disabled={isInCart(product.id)}
         >
           <AddShoppingCartIcon />
-          {!isInCart(id) ? 'Add to cart' : 'Added'}
+          {!isInCart(product.id) ? 'Add to cart' : 'Added'}
         </Button>
       </Stack>
 

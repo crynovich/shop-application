@@ -14,7 +14,7 @@ import { Cart } from '../products/cart/cart';
 import { CartContext } from '../products/cart/cart.context';
 
 export function NavigationBar() {
-  const { productsInCart } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -47,7 +47,7 @@ export function NavigationBar() {
               color="inherit"
               onClick={toggleDrawer(true)}
             >
-              <Badge badgeContent={productsInCart.length} color="secondary">
+              <Badge badgeContent={cartItems.length} color="secondary">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>

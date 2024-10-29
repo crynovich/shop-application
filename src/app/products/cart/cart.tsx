@@ -4,16 +4,21 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useCallback, useContext } from 'react';
 import { CartItem } from './cart-item';
 import { CartContext } from './cart.context';
+import { EURO_SYMBOL } from '../../shared/models/constants';
+
+export interface ICartProduct {
+  productId: number;
+  productName: string;
+  quantity: number;
+  price: number;
+}
 
 export const Cart = ({
   onCloseCartClick,
 }: {
   onCloseCartClick?: () => void;
 }) => {
-  // todo: make a call here also to get the latest prices / product names
-
-  const { productsInCart, deleteProduct, changeQuantity } =
-    useContext(CartContext);
+  const { cartItems, deleteProduct, changeQuantity } = useContext(CartContext);
 
   const handleCloseCartClick = useCallback(() => {
     if (onCloseCartClick) onCloseCartClick();
@@ -41,7 +46,7 @@ export const Cart = ({
         >
           <Stack direction="row" alignItems="center" gap={1}>
             <ShoppingCartIcon color="primary" />
-            <Typography variant="h6">{`Your Cart (${productsInCart.length})`}</Typography>
+            <Typography variant="h6">{`Your Cart (${cartItems.length})`}</Typography>
           </Stack>
 
           <IconButton onClick={handleCloseCartClick}>
@@ -53,7 +58,7 @@ export const Cart = ({
 
         {/* todo: make this area scrollable */}
         <Stack direction="column" gap={2}>
-          {productsInCart.map((product) => (
+          {cartItems.map((product) => (
             <CartItem
               key={product.productId}
               product={product}
@@ -66,7 +71,10 @@ export const Cart = ({
 
       <Stack direction="column" gap={2}>
         <Stack direction="row-reverse" justifyContent="space-between">
-          <Typography variant="h6">Total: 149$</Typography>
+          {/* todo: move this calculation out */}
+          <Typography variant="h6">{`Total: ${cartItems
+            .map((cp) => cp.price)
+            .reduce((v, acc) => v + acc, 0)}${EURO_SYMBOL}`}</Typography>
         </Stack>
         <Stack direction="row-reverse" gap={2}>
           <Button size="large" variant="contained">

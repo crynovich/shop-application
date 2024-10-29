@@ -6,6 +6,7 @@ import { useGetData } from '../shared/hooks/use-get-data.hook';
 import { productsService } from './products.service';
 import { Loading } from '../shared/components/loading';
 import { CartContext } from './cart/cart.context';
+import { Product } from './products.models';
 
 export const Products = () => {
   const { data: products, loading } = useGetData(productsService.getProducts);
@@ -21,8 +22,8 @@ export const Products = () => {
   );
 
   const handleAddToCartClick = useCallback(
-    (productId: number) => {
-      addProduct(productId);
+    (product: Product) => {
+      addProduct(product);
     },
     [addProduct]
   );
