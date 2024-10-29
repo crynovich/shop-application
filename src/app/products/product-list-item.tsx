@@ -8,17 +8,20 @@ import {
 } from '@mui/material';
 import { Product } from './products.models';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import CheckIcon from '@mui/icons-material/Check';
 import { useCallback } from 'react';
 import { EURO_SYMBOL } from '../shared/models/constants';
 
 interface ProductListItemProps {
   product: Product;
+  inCart?: boolean;
   onProductClick?: (productId: number) => void;
   onAddToCartClick?: (productId: number) => void;
 }
 
 export function ProductListItem({
   product,
+  inCart,
   onProductClick,
   onAddToCartClick,
 }: ProductListItemProps) {
@@ -76,14 +79,25 @@ export function ProductListItem({
               {EURO_SYMBOL}
             </Typography>
 
-            <IconButton
-              onClick={() => handleAddToCartClick(product.id)}
-              className="flex-none"
-              size="large"
-              color="secondary"
-            >
-              <AddShoppingCartIcon />
-            </IconButton>
+            {!inCart ? (
+              <IconButton
+                onClick={() => handleAddToCartClick(product.id)}
+                className="flex-none"
+                size="large"
+                color="secondary"
+              >
+                <AddShoppingCartIcon />
+              </IconButton>
+            ) : (
+              // todo: add animation on enter
+              <Stack
+                justifyContent="center"
+                alignItems="center"
+                className="h-12 w-12"
+              >
+                <CheckIcon color="secondary" />
+              </Stack>
+            )}
           </Stack>
         </Stack>
       </CardContent>

@@ -1,14 +1,13 @@
 import { productsService } from '../products.service';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ProductDetailsHeader } from './product-details-header';
-import { useGetData } from '../../shared/hooks/useGetData';
+import { useGetData } from '../../shared/hooks/use-get-data.hook';
 import { Loading } from '../../shared/components/loading';
 import Grid from '@mui/material/Grid2';
 import { GeneralInformation } from './general-information';
 import { Stack, Typography } from '@mui/material';
 import { ProductDetailsCard } from './product-details-card';
 import { ProductFeatures } from './product-features';
-import { useCallback } from 'react';
 
 export const ProductDetails = () => {
   const { productId } = useParams();
@@ -19,29 +18,15 @@ export const ProductDetails = () => {
   );
 };
 
+// todo: consider moving this to a separate file
 export const ProductDetailsContent = ({ productId }: { productId: number }) => {
   const { data, loading } = useGetData(productsService.getProduct, productId);
-  const navigate = useNavigate();
-
-  const handleBackClick = useCallback(() => {
-    navigate('/');
-  }, [navigate]);
-
-  const handleAddToCartClick = useCallback((productId: number) => {
-    console.log('add to cart click', productId);
-  }, []);
 
   if (loading) return <Loading />;
 
   return (
     <>
-      <ProductDetailsHeader
-        id={data.id}
-        name={data.name}
-        price={data.price}
-        onBackClick={handleBackClick}
-        onAddToCartClick={handleAddToCartClick}
-      />
+      <ProductDetailsHeader id={data.id} name={data.name} price={data.price} />
       <Grid container spacing={2} className="p-4">
         <Grid size={{ xs: 12, md: 8 }}>
           <Stack direction="column" gap={2}>

@@ -1,14 +1,20 @@
 import { IconButton, Stack, TextField } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import { useState } from 'react';
 
-export const Counter = () => {
-  const [quantity, setQuantity] = useState(1);
+interface CounterProps {
+  quantity: number;
+  onChange: (newValue: number) => void;
+}
 
-  const handleIncrement = () => setQuantity((prev) => prev + 1);
-  const handleDecrement = () =>
-    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+export const Counter = ({ quantity, onChange }: CounterProps) => {
+  const handleIncrement = () => {
+    onChange(quantity + 1);
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 1) onChange(quantity - 1);
+  };
 
   return (
     <Stack direction="row">

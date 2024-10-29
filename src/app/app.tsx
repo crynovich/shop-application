@@ -4,6 +4,7 @@ import { blue, orange } from '@mui/material/colors';
 import { NavigationBar } from './navigation-bar/navigation-bar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ProductDetails } from './products/details/product-details';
+import { CartContextProvider } from './products/cart/cart.context.provider';
 
 // todo: move this out of the app tsx
 const theme = createTheme({
@@ -21,16 +22,18 @@ export function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <Stack direction="column" className="h-full">
-          <NavigationBar />
-          <Box className="overflow-auto p-4 h-full">
-            {/* todo: move this out of the app tsx */}
-            <Routes>
-              <Route path="/" element={<Products />}></Route>
-              <Route path="/:productId" element={<ProductDetails />}></Route>
-            </Routes>
-          </Box>
-        </Stack>
+        <CartContextProvider>
+          <Stack direction="column" className="h-full">
+            <NavigationBar />
+            <Box className="overflow-auto p-4 h-full">
+              {/* todo: move this out of the app tsx */}
+              <Routes>
+                <Route path="/" element={<Products />}></Route>
+                <Route path="/:productId" element={<ProductDetails />}></Route>
+              </Routes>
+            </Box>
+          </Stack>
+        </CartContextProvider>
       </ThemeProvider>
     </BrowserRouter>
   );

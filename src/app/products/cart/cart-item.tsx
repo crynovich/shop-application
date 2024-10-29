@@ -1,8 +1,27 @@
 import { Card, IconButton, Stack, Typography } from '@mui/material';
 import { Counter } from '../../shared/components/counter';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ProductInCart } from './cart.models';
 
-export const CartItem = () => {
+interface CartItemProps {
+  product: ProductInCart;
+  onDeleteProductFromCart?: (productId: number) => void;
+  onQuantityChange?: (productId: number, quantity: number) => void;
+}
+
+export const CartItem = ({
+  product,
+  onDeleteProductFromCart,
+  onQuantityChange,
+}: CartItemProps) => {
+  const handleDeleteProductFromCart = () => {
+    if (onDeleteProductFromCart) onDeleteProductFromCart(product.productId);
+  };
+
+  const handleQuantityChange = (quantity: number) => {
+    if (onQuantityChange) onQuantityChange(product.productId, quantity);
+  };
+
   return (
     <Card variant="outlined" className="p-4">
       <Stack
@@ -21,13 +40,16 @@ export const CartItem = () => {
           className="overflow-hidden"
         >
           <Stack direction="column" className="overflow-hidden">
-            <Typography className="truncate">item 1</Typography>
-            <Typography variant="caption">140$</Typography>
+            <Typography className="truncate">{product.productId}</Typography>
+            <Typography variant="caption">{product.price}</Typography>
           </Stack>
-          <Counter />
+          <Counter
+            quantity={product.quantity}
+            onChange={handleQuantityChange}
+          />
         </Stack>
 
-        <IconButton className="flex-none">
+        <IconButton onClick={handleDeleteProductFromCart} className="flex-none">
           <DeleteIcon />
         </IconButton>
       </Stack>

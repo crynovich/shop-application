@@ -9,10 +9,12 @@ import {
 } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from 'react-router-dom';
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { Cart } from '../products/cart/cart';
+import { CartContext } from '../products/cart/cart.context';
 
 export function NavigationBar() {
+  const { productsInCart } = useContext(CartContext);
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -45,7 +47,7 @@ export function NavigationBar() {
               color="inherit"
               onClick={toggleDrawer(true)}
             >
-              <Badge badgeContent={17} color="secondary">
+              <Badge badgeContent={productsInCart.length} color="secondary">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
