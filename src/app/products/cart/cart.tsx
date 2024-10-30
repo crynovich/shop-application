@@ -20,6 +20,10 @@ export const Cart = ({
 }) => {
   const { cartItems, deleteProduct, changeQuantity } = useContext(CartContext);
 
+  const totalPrice = cartItems
+    .reduce((acc, v) => v.price * v.quantity + acc, 0)
+    .toFixed(2);
+
   const handleCloseCartClick = useCallback(() => {
     if (onCloseCartClick) onCloseCartClick();
   }, [onCloseCartClick]);
@@ -30,6 +34,10 @@ export const Cart = ({
 
   const handleQuantityChange = (productId: number, quantity: number) => {
     changeQuantity(productId, quantity);
+  };
+
+  const handleCheckoutClick = () => {
+    console.log({ cartItems, totalPrice });
   };
 
   return (
@@ -71,13 +79,14 @@ export const Cart = ({
 
       <Stack direction="column" gap={2}>
         <Stack direction="row-reverse" justifyContent="space-between">
-          {/* todo: move this calculation out */}
-          <Typography variant="h6">{`Total: ${cartItems
-            .map((cp) => cp.price)
-            .reduce((v, acc) => v + acc, 0)}${EURO_SYMBOL}`}</Typography>
+          <Typography variant="h6">{`Total: ${totalPrice}${EURO_SYMBOL}`}</Typography>
         </Stack>
         <Stack direction="row-reverse" gap={2}>
-          <Button size="large" variant="contained">
+          <Button
+            onClick={handleCheckoutClick}
+            size="large"
+            variant="contained"
+          >
             Checkout
           </Button>
           <Button onClick={handleCloseCartClick}>Continue Shopping</Button>
