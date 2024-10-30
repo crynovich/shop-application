@@ -2,14 +2,15 @@ import { ReactNode, useEffect, useState } from 'react';
 import { Cart, ICartItem } from './cart.models';
 import { CartContext } from './cart.context';
 import { Product } from '../products.models';
+import { cartStorage } from './cart-storage';
 
 export const CartContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [cart, setCart] = useState<Cart>({});
+  const [cart, setCart] = useState<Cart>(cartStorage.getCart() ?? {});
 
   useEffect(() => {
-    console.log({ cart });
+    cartStorage.setCart(cart);
   }, [cart]);
 
   // todo: figure out what's wrong with this
@@ -34,7 +35,7 @@ export const CartContextProvider: React.FC<{ children: ReactNode }> = ({
     }));
   };
 
-  const removeProduct = (productId: number) => {
+  const deleteProduct = (productId: number) => {
     setCart((cart) => {
       const { [productId]: _, ...remainingCart } = cart;
       return remainingCart;
@@ -54,7 +55,7 @@ export const CartContextProvider: React.FC<{ children: ReactNode }> = ({
         cartItems,
         isInCart,
         addProduct,
-        deleteProduct: removeProduct,
+        deleteProduct,
         changeQuantity,
       }}
     >
