@@ -2,6 +2,7 @@ import { Card, IconButton, Stack, Typography } from '@mui/material';
 import { Counter } from '../../shared/components/counter';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ICartProduct } from './cart';
+import { EURO_SYMBOL } from '../../shared/models/constants';
 
 interface CartItemProps {
   product: ICartProduct;
@@ -41,7 +42,10 @@ export const CartItem = ({
         >
           <Stack direction="column" className="overflow-hidden">
             <Typography className="truncate">{product.productName}</Typography>
-            <Typography variant="caption">{product.price}</Typography>
+            <Typography variant="caption">
+              {product.price}
+              {EURO_SYMBOL}
+            </Typography>
           </Stack>
           <Counter
             quantity={product.quantity}
