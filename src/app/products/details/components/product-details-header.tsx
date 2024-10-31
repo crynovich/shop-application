@@ -1,28 +1,37 @@
-import { Button, Divider, Stack, Typography } from '@mui/material';
+import {
+  Button,
+  Divider,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Product } from '../../shared/data-access/products.models';
+import { IProduct } from '../../shared/data-access/products.models';
 import { CartContext } from '../../cart/context/cart.context';
 import { EURO_SYMBOL } from '../../../shared/data-access/constants';
+import CheckIcon from '@mui/icons-material/Check';
 
 interface ProductDetailsHeaderProps {
-  product: Product;
+  product: IProduct;
 }
 
 export const ProductDetailsHeader = ({
   product,
 }: ProductDetailsHeaderProps) => {
   const { isInCart, addProduct } = useContext(CartContext);
-
+  const theme = useTheme();
+  const isMediumScreenUp = useMediaQuery(theme.breakpoints.up('md'));
   const navigate = useNavigate();
 
   const handleBackClick = () => {
     navigate('/');
   };
 
-  const handleAddToCartClick = (product: Product) => () => {
+  const handleAddToCartClick = (product: IProduct) => () => {
     addProduct(product);
   };
 
@@ -32,7 +41,7 @@ export const ProductDetailsHeader = ({
         <Stack direction="row" alignItems="center" gap={3}>
           <Button variant="outlined" onClick={handleBackClick}>
             <ArrowBackIcon />
-            Back
+            {isMediumScreenUp && 'Back'}
           </Button>
 
           <Typography variant="h5">
@@ -41,15 +50,15 @@ export const ProductDetailsHeader = ({
           </Typography>
         </Stack>
 
-        {/* todo: make the buttons switch to icon buttons on smaller screens */}
         <Button
           variant="outlined"
           color="secondary"
           onClick={handleAddToCartClick(product)}
           disabled={isInCart(product.id)}
         >
-          <AddShoppingCartIcon />
-          {!isInCart(product.id) ? 'Add to cart' : 'Added'}
+          {isInCart(product.id) ? <CheckIcon /> : <AddShoppingCartIcon />}
+
+          {isMediumScreenUp && (isInCart(product.id) ? 'Added' : 'Add to cart')}
         </Button>
       </Stack>
 

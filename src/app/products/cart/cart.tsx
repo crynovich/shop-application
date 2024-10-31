@@ -13,18 +13,11 @@ import { CartContext } from './context/cart.context';
 import { CartItem } from './components/cart-item';
 import { EURO_SYMBOL } from '../../shared/data-access/constants';
 
-export interface ICartProduct {
-  productId: number;
-  productName: string;
-  quantity: number;
-  price: number;
+interface CartProps {
+  onCloseCartClick?: () => void;
 }
 
-export const Cart = ({
-  onCloseCartClick,
-}: {
-  onCloseCartClick?: () => void;
-}) => {
+export const Cart = ({ onCloseCartClick }: CartProps) => {
   const { cartItems, deleteProduct, changeQuantity } = useContext(CartContext);
 
   const totalPrice = cartItems
@@ -75,7 +68,7 @@ export const Cart = ({
           {cartItems.map((product) => (
             <Box key={product.productId} className="flex-none">
               <CartItem
-                product={product}
+                cartItem={product}
                 onDeleteProductFromCart={handleDeleteProductFromCart}
                 onQuantityChange={handleQuantityChange}
               />

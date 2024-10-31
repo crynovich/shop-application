@@ -1,13 +1,13 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { Cart, ICartItem } from '../data-access/cart.models';
+import { ICart, ICartItem } from '../data-access/cart.models';
 import { cartStorage } from '../data-access/cart-storage';
-import { Product } from '../../shared/data-access/products.models';
+import { IProduct } from '../../shared/data-access/products.models';
 import { CartContext } from './cart.context';
 
 export const CartContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [cart, setCart] = useState<Cart>(cartStorage.getCart() ?? {});
+  const [cart, setCart] = useState<ICart>(cartStorage.getCart() ?? {});
 
   useEffect(() => {
     cartStorage.setCart(cart);
@@ -19,7 +19,7 @@ export const CartContextProvider: React.FC<{ children: ReactNode }> = ({
     return !!cart[productId];
   };
 
-  const addProduct = (product: Product) => {
+  const addProduct = (product: IProduct) => {
     if (isInCart(product.id)) return;
 
     setCart((cart) => ({

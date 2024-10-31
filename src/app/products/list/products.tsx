@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGetData } from '../../shared/hooks/use-get-data.hook';
 import { productsService } from '../shared/data-access/products.service';
 import { CartContext } from '../cart/context/cart.context';
-import { Product } from '../shared/data-access/products.models';
+import { IProduct } from '../shared/data-access/products.models';
 import { Loading } from '../../shared/components/loading';
 import { ProductListItem } from './components/product-list-item';
 
@@ -17,7 +17,7 @@ export const Products = () => {
     navigate(`/${productId}`);
   };
 
-  const handleAddToCartClick = (product: Product) => {
+  const handleAddToCartClick = (product: IProduct) => {
     addProduct(product);
   };
 

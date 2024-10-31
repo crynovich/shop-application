@@ -8,7 +8,11 @@ import { ProductDetailsCard } from './product-details-card';
 import { ProductFeatures } from './product-features';
 import { GeneralInformation } from './general-information';
 
-export const ProductDetailsContent = ({ productId }: { productId: number }) => {
+interface ProductDetailsProps {
+  productId: number;
+}
+
+export const ProductDetailsContent = ({ productId }: ProductDetailsProps) => {
   const { data: product, loading } = useGetData(
     productsService.getProduct,
     productId
@@ -34,7 +38,7 @@ export const ProductDetailsContent = ({ productId }: { productId: number }) => {
         <Grid size={{ xs: 12, md: 4 }}>
           <Stack direction="column" gap={2}>
             <ProductDetailsCard title="Description">
-              <Typography variant="body2">{product.description}</Typography>
+              <Typography>{product.description}</Typography>
             </ProductDetailsCard>
 
             <ProductDetailsCard title="Additional Information">

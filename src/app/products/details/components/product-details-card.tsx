@@ -1,12 +1,14 @@
 import { Card, CardContent, Divider, Stack, Typography } from '@mui/material';
 
+interface ProductDetailsCardProps {
+  title: string;
+  children: React.ReactNode;
+}
+
 export const ProductDetailsCard = ({
   title,
   children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) => {
+}: ProductDetailsCardProps) => {
   return (
     <Card variant="outlined">
       <CardContent>

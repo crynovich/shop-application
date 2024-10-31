@@ -8,14 +8,14 @@ import {
 } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import CheckIcon from '@mui/icons-material/Check';
-import { Product } from '../../shared/data-access/products.models';
+import { IProduct } from '../../shared/data-access/products.models';
 import { EURO_SYMBOL } from '../../../shared/data-access/constants';
 
 interface ProductListItemProps {
-  product: Product;
+  product: IProduct;
   inCart?: boolean;
   onProductClick?: (productId: number) => void;
-  onAddToCartClick?: (product: Product) => void;
+  onAddToCartClick?: (product: IProduct) => void;
 }
 
 export function ProductListItem({
@@ -24,11 +24,11 @@ export function ProductListItem({
   onProductClick,
   onAddToCartClick,
 }: ProductListItemProps) {
-  const handleProductClick = (productId: number) => {
+  const handleProductClick = (productId: number) => () => {
     if (onProductClick) onProductClick(productId);
   };
 
-  const handleAddToCartClick = (product: Product) => () => {
+  const handleAddToCartClick = (product: IProduct) => () => {
     if (onAddToCartClick) onAddToCartClick(product);
   };
 
@@ -44,19 +44,14 @@ export function ProductListItem({
           <Stack direction="column" gap={1}>
             <Link
               component="button"
-              onClick={() => handleProductClick(product.id)}
+              onClick={handleProductClick(product.id)}
               underline="hover"
             >
               <Typography className="flex-none truncate" variant="h6">
                 {product.name}
               </Typography>
             </Link>
-            <Typography
-              className="flex-auto line-clamp-2"
-              variant="body2"
-              // todo: fix inline overrides
-              sx={{ color: 'text.secondary' }}
-            >
+            <Typography className="flex-auto line-clamp-2" variant="body2">
               {product.description}
             </Typography>
           </Stack>
@@ -72,7 +67,15 @@ export function ProductListItem({
               {EURO_SYMBOL}
             </Typography>
 
-            {!inCart ? (
+            {inCart ? (
+              <Stack
+                justifyContent="center"
+                alignItems="center"
+                className="h-12 w-12"
+              >
+                <CheckIcon color="secondary" />
+              </Stack>
+            ) : (
               <IconButton
                 onClick={handleAddToCartClick(product)}
                 className="flex-none"
@@ -81,15 +84,6 @@ export function ProductListItem({
               >
                 <AddShoppingCartIcon />
               </IconButton>
-            ) : (
-              // todo: add animation on enter
-              <Stack
-                justifyContent="center"
-                alignItems="center"
-                className="h-12 w-12"
-              >
-                <CheckIcon color="secondary" />
-              </Stack>
             )}
           </Stack>
         </Stack>

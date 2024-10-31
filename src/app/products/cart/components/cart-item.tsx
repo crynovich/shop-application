@@ -1,26 +1,26 @@
 import { Card, IconButton, Stack, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { ICartProduct } from '../cart';
 import { EURO_SYMBOL } from '../../../shared/data-access/constants';
 import { Counter } from '../../../shared/components/counter';
+import { ICartItem } from '../data-access/cart.models';
 
 interface CartItemProps {
-  product: ICartProduct;
+  cartItem: ICartItem;
   onDeleteProductFromCart?: (productId: number) => void;
   onQuantityChange?: (productId: number, quantity: number) => void;
 }
 
 export const CartItem = ({
-  product,
+  cartItem,
   onDeleteProductFromCart,
   onQuantityChange,
 }: CartItemProps) => {
   const handleDeleteProductFromCart = () => {
-    if (onDeleteProductFromCart) onDeleteProductFromCart(product.productId);
+    if (onDeleteProductFromCart) onDeleteProductFromCart(cartItem.productId);
   };
 
   const handleQuantityChange = (quantity: number) => {
-    if (onQuantityChange) onQuantityChange(product.productId, quantity);
+    if (onQuantityChange) onQuantityChange(cartItem.productId, quantity);
   };
 
   return (
@@ -41,14 +41,14 @@ export const CartItem = ({
           className="overflow-hidden"
         >
           <Stack direction="column" className="overflow-hidden">
-            <Typography className="truncate">{product.productName}</Typography>
+            <Typography className="truncate">{cartItem.productName}</Typography>
             <Typography variant="caption">
-              {product.price}
+              {cartItem.price}
               {EURO_SYMBOL}
             </Typography>
           </Stack>
           <Counter
-            quantity={product.quantity}
+            quantity={cartItem.quantity}
             onChange={handleQuantityChange}
           />
         </Stack>

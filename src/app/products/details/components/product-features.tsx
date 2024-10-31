@@ -1,22 +1,24 @@
-import { List, ListItem } from '@mui/material';
+import { List, ListItem, Typography } from '@mui/material';
 
-export const ProductFeatures = ({ features }: { features: string[] }) => {
+interface ProductFeaturesProps {
+  features: string[];
+}
+
+export const ProductFeatures = ({ features }: ProductFeaturesProps) => {
+  const listSx = {
+    listStyleType: 'disc',
+    pl: 4,
+  };
+
+  const listItemSx = {
+    display: 'list-item',
+  };
+
   return (
-    <List
-      //   todo: fix the inline overrides
-      sx={{
-        listStyleType: 'disc',
-        pl: 4,
-      }}
-    >
+    <List sx={listSx}>
       {features.map((feature) => (
-        <ListItem
-          key={feature}
-          sx={{
-            display: 'list-item',
-          }}
-        >
-          {feature}
+        <ListItem key={feature} sx={listItemSx}>
+          <Typography>{feature}</Typography>
         </ListItem>
       ))}
     </List>

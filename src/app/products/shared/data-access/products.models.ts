@@ -1,13 +1,13 @@
-export interface Product {
+export interface IProduct {
   id: number;
   name: string;
   price: number;
   description: string;
   features: string[];
-  specifications: ProductInformation;
-  additionalInformation: ProductInformation;
+  specifications: IProductInformation;
+  additionalInformation: IProductInformation;
 }
 
-export interface ProductInformation {
+export interface IProductInformation {
   [key: string]: number | string | string[];
 }

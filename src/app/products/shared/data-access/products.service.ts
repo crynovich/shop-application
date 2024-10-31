@@ -1,14 +1,14 @@
-import { Product } from './products.models';
+import { IProduct } from './products.models';
 
 export const productsService = {
-  getProducts: async (): Promise<Product[]> => {
+  getProducts: async (): Promise<IProduct[]> => {
     return (
       await fetch('https://61898893be95487994abc2d8b4cf839e.api.mockbin.io/')
     ).json();
   },
 
   // mocked implementation since the GET/{id} endpoint doesn't exist
-  getProduct: async (id: number): Promise<Product> => {
+  getProduct: async (id: number): Promise<IProduct> => {
     const allProducts = await productsService.getProducts();
     const product = allProducts.find((v) => v.id === id);
 
