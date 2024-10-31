@@ -1,12 +1,12 @@
-import { ProductListItem } from './product-list-item';
 import Grid from '@mui/material/Grid2';
 import { useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGetData } from '../shared/hooks/use-get-data.hook';
-import { productsService } from './products.service';
-import { Loading } from '../shared/components/loading';
-import { CartContext } from './cart/cart.context';
-import { Product } from './products.models';
+import { useGetData } from '../../shared/hooks/use-get-data.hook';
+import { productsService } from '../shared/data-access/products.service';
+import { CartContext } from '../cart/context/cart.context';
+import { Product } from '../shared/data-access/products.models';
+import { Loading } from '../../shared/components/loading';
+import { ProductListItem } from './components/product-list-item';
 
 export const Products = () => {
   const { data: products, loading } = useGetData(productsService.getProducts);

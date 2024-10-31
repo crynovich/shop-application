@@ -1,8 +1,8 @@
 import { Card, IconButton, Stack, Typography } from '@mui/material';
-import { Counter } from '../../shared/components/counter';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { ICartProduct } from './cart';
-import { EURO_SYMBOL } from '../../shared/models/constants';
+import { ICartProduct } from '../cart';
+import { EURO_SYMBOL } from '../../../shared/data-access/constants';
+import { Counter } from '../../../shared/components/counter';
 
 interface CartItemProps {
   product: ICartProduct;

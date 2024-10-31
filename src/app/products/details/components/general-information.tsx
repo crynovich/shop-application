@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid2';
 import { Typography } from '@mui/material';
-import { ProductInformation } from '../products.models';
+import { ProductInformation } from '../../shared/data-access/products.models';
 
 export const GeneralInformation = ({
   information,

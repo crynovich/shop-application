@@ -6,11 +6,11 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { Product } from './products.models';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import CheckIcon from '@mui/icons-material/Check';
 import { useCallback } from 'react';
-import { EURO_SYMBOL } from '../shared/models/constants';
+import { Product } from '../../shared/data-access/products.models';
+import { EURO_SYMBOL } from '../../../shared/data-access/constants';
 
 interface ProductListItemProps {
   product: Product;

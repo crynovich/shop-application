@@ -1,8 +1,8 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { Cart, ICartItem } from './cart.models';
+import { Cart, ICartItem } from '../data-access/cart.models';
+import { cartStorage } from '../data-access/cart-storage';
+import { Product } from '../../shared/data-access/products.models';
 import { CartContext } from './cart.context';
-import { Product } from '../products.models';
-import { cartStorage } from './cart-storage';
 
 export const CartContextProvider: React.FC<{ children: ReactNode }> = ({
   children,

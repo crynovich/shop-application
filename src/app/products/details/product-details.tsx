@@ -1,13 +1,13 @@
-import { productsService } from '../products.service';
 import { useParams } from 'react-router-dom';
-import { ProductDetailsHeader } from './product-details-header';
 import { useGetData } from '../../shared/hooks/use-get-data.hook';
 import { Loading } from '../../shared/components/loading';
 import Grid from '@mui/material/Grid2';
-import { GeneralInformation } from './general-information';
 import { Stack, Typography } from '@mui/material';
-import { ProductDetailsCard } from './product-details-card';
-import { ProductFeatures } from './product-features';
+import { productsService } from '../shared/data-access/products.service';
+import { ProductDetailsHeader } from './components/product-details-header';
+import { ProductDetailsCard } from './components/product-details-card';
+import { ProductFeatures } from './components/product-features';
+import { GeneralInformation } from './components/general-information';
 
 export const ProductDetails = () => {
   const { productId } = useParams();

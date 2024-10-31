@@ -1,10 +1,10 @@
-import { Products } from './products/products';
 import { Box, Stack, ThemeProvider, createTheme } from '@mui/material';
 import { blue, orange } from '@mui/material/colors';
 import { NavigationBar } from './navigation-bar/navigation-bar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ProductDetails } from './products/details/product-details';
-import { CartContextProvider } from './products/cart/cart.context.provider';
+import { CartContextProvider } from './products/cart/context/cart.context.provider';
+import { Products } from './products/list/products';
 
 // todo: move this out of the app tsx
 const theme = createTheme({

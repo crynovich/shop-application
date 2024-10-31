@@ -1,6 +1,6 @@
 import { createContext } from 'react';
-import { ICartItem } from './cart.models';
-import { Product } from '../products.models';
+import { ICartItem } from '../data-access/cart.models';
+import { Product } from '../../shared/data-access/products.models';
 
 interface CartContextProps {
   readonly cartItems: ICartItem[];

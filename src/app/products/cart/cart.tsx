@@ -2,9 +2,9 @@ import { Button, Divider, IconButton, Stack, Typography } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CloseIcon from '@mui/icons-material/Close';
 import { useCallback, useContext } from 'react';
-import { CartItem } from './cart-item';
-import { CartContext } from './cart.context';
-import { EURO_SYMBOL } from '../../shared/models/constants';
+import { CartContext } from './context/cart.context';
+import { CartItem } from './components/cart-item';
+import { EURO_SYMBOL } from '../../shared/data-access/constants';
 
 export interface ICartProduct {
   productId: number;

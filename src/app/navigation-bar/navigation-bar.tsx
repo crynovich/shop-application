@@ -10,8 +10,8 @@ import {
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from 'react-router-dom';
 import { useCallback, useContext, useState } from 'react';
+import { CartContext } from '../products/cart/context/cart.context';
 import { Cart } from '../products/cart/cart';
-import { CartContext } from '../products/cart/cart.context';
 
 export function NavigationBar() {
   const { cartItems } = useContext(CartContext);

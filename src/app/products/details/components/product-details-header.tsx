@@ -1,11 +1,11 @@
 import { Button, Divider, Stack, Typography } from '@mui/material';
-import { EURO_SYMBOL } from '../../shared/models/constants';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CartContext } from '../cart/cart.context';
-import { Product } from '../products.models';
+import { Product } from '../../shared/data-access/products.models';
+import { CartContext } from '../../cart/context/cart.context';
+import { EURO_SYMBOL } from '../../../shared/data-access/constants';
 
 interface ProductDetailsHeaderProps {
   product: Product;
