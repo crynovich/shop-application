@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import CheckIcon from '@mui/icons-material/Check';
-import { useCallback } from 'react';
 import { Product } from '../../shared/data-access/products.models';
 import { EURO_SYMBOL } from '../../../shared/data-access/constants';
 
@@ -25,19 +24,13 @@ export function ProductListItem({
   onProductClick,
   onAddToCartClick,
 }: ProductListItemProps) {
-  const handleProductClick = useCallback(
-    (productId: number) => {
-      if (onProductClick) onProductClick(productId);
-    },
-    [onProductClick]
-  );
+  const handleProductClick = (productId: number) => {
+    if (onProductClick) onProductClick(productId);
+  };
 
-  const handleAddToCartClick = useCallback(
-    (product: Product) => {
-      if (onAddToCartClick) onAddToCartClick(product);
-    },
-    [onAddToCartClick]
-  );
+  const handleAddToCartClick = (product: Product) => () => {
+    if (onAddToCartClick) onAddToCartClick(product);
+  };
 
   return (
     <Card variant="outlined" className="h-44">
@@ -81,8 +74,7 @@ export function ProductListItem({
 
             {!inCart ? (
               <IconButton
-                // todo: fix this inline call
-                onClick={() => handleAddToCartClick(product)}
+                onClick={handleAddToCartClick(product)}
                 className="flex-none"
                 size="large"
                 color="secondary"

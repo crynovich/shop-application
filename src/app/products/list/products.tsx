@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid2';
-import { useCallback, useContext } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGetData } from '../../shared/hooks/use-get-data.hook';
 import { productsService } from '../shared/data-access/products.service';
@@ -11,22 +11,15 @@ import { ProductListItem } from './components/product-list-item';
 export const Products = () => {
   const { data: products, loading } = useGetData(productsService.getProducts);
   const { isInCart, addProduct } = useContext(CartContext);
-
   const navigate = useNavigate();
 
-  const handleProductClick = useCallback(
-    (productId: number) => {
-      navigate(`/${productId}`);
-    },
-    [navigate]
-  );
+  const handleProductClick = (productId: number) => {
+    navigate(`/${productId}`);
+  };
 
-  const handleAddToCartClick = useCallback(
-    (product: Product) => {
-      addProduct(product);
-    },
-    [addProduct]
-  );
+  const handleAddToCartClick = (product: Product) => {
+    addProduct(product);
+  };
 
   if (loading) return <Loading />;
 

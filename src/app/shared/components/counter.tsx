@@ -16,6 +16,9 @@ export const Counter = ({ quantity, onChange }: CounterProps) => {
     if (quantity > 1) onChange(quantity - 1);
   };
 
+  const slotProps = { input: { readOnly: true } };
+  const sx = { width: 50 };
+
   return (
     <Stack direction="row">
       <IconButton onClick={handleDecrement}>
@@ -26,14 +29,8 @@ export const Counter = ({ quantity, onChange }: CounterProps) => {
         value={quantity}
         size="small"
         variant="outlined"
-        slotProps={{
-          input: {
-            readOnly: true,
-          },
-        }}
-        sx={{
-          width: 50,
-        }}
+        slotProps={slotProps}
+        sx={sx}
       />
       <IconButton onClick={handleIncrement}>
         <AddCircleOutlineIcon />

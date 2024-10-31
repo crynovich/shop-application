@@ -13,10 +13,8 @@ export const CartContextProvider: React.FC<{ children: ReactNode }> = ({
     cartStorage.setCart(cart);
   }, [cart]);
 
-  // todo: figure out what's wrong with this
   const cartItems: ICartItem[] = Object.values(cart);
 
-  // todo: useCallback on everything
   const isInCart = (productId: number) => {
     return !!cart[productId];
   };

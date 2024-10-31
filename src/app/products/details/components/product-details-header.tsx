@@ -1,7 +1,7 @@
 import { Button, Divider, Stack, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { useCallback, useContext } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Product } from '../../shared/data-access/products.models';
 import { CartContext } from '../../cart/context/cart.context';
@@ -18,16 +18,13 @@ export const ProductDetailsHeader = ({
 
   const navigate = useNavigate();
 
-  const handleBackClick = useCallback(() => {
+  const handleBackClick = () => {
     navigate('/');
-  }, [navigate]);
+  };
 
-  const handleAddToCartClick = useCallback(
-    (product: Product) => {
-      addProduct(product);
-    },
-    [addProduct]
-  );
+  const handleAddToCartClick = (product: Product) => () => {
+    addProduct(product);
+  };
 
   return (
     <Stack direction="column" gap={2}>
@@ -48,7 +45,7 @@ export const ProductDetailsHeader = ({
         <Button
           variant="outlined"
           color="secondary"
-          onClick={() => handleAddToCartClick(product)}
+          onClick={handleAddToCartClick(product)}
           disabled={isInCart(product.id)}
         >
           <AddShoppingCartIcon />

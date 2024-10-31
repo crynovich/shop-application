@@ -1,7 +1,7 @@
 import { Button, Divider, IconButton, Stack, Typography } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CloseIcon from '@mui/icons-material/Close';
-import { useCallback, useContext } from 'react';
+import { useContext } from 'react';
 import { CartContext } from './context/cart.context';
 import { CartItem } from './components/cart-item';
 import { EURO_SYMBOL } from '../../shared/data-access/constants';
@@ -21,12 +21,12 @@ export const Cart = ({
   const { cartItems, deleteProduct, changeQuantity } = useContext(CartContext);
 
   const totalPrice = cartItems
-    .reduce((acc, v) => v.price * v.quantity + acc, 0)
+    .reduce((acc, current) => current.price * current.quantity + acc, 0)
     .toFixed(2);
 
-  const handleCloseCartClick = useCallback(() => {
+  const handleCloseCartClick = () => {
     if (onCloseCartClick) onCloseCartClick();
-  }, [onCloseCartClick]);
+  };
 
   const handleDeleteProductFromCart = (productId: number) => {
     deleteProduct(productId);

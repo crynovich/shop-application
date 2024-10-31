@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from 'react-router-dom';
-import { useCallback, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { CartContext } from '../products/cart/context/cart.context';
 import { Cart } from '../products/cart/cart';
 
@@ -18,16 +18,13 @@ export function NavigationBar() {
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const toggleDrawer = useCallback(
-    (newOpen: boolean) => () => {
-      setIsDrawerOpen(newOpen);
-    },
-    [setIsDrawerOpen]
-  );
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setIsDrawerOpen(newOpen);
+  };
 
-  const handleAppClick = useCallback(() => {
+  const handleAppClick = () => {
     navigate('/');
-  }, [navigate]);
+  };
 
   return (
     <>
