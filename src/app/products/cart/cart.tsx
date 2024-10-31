@@ -1,4 +1,11 @@
-import { Button, Divider, IconButton, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  Stack,
+  Typography,
+} from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CloseIcon from '@mui/icons-material/Close';
 import { useContext } from 'react';
@@ -42,11 +49,11 @@ export const Cart = ({
 
   return (
     <Stack
-      className="p-4 h-full"
+      className="p-4 h-full gap-6 overflow-hidden"
       direction="column"
       justifyContent="space-between"
     >
-      <Stack direction="column" gap={2}>
+      <Stack direction="column" gap={2} className="h-full overflow-hidden">
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -64,15 +71,15 @@ export const Cart = ({
 
         <Divider />
 
-        {/* todo: make this area scrollable */}
-        <Stack direction="column" gap={2}>
+        <Stack direction="column" gap={2} className="overflow-auto">
           {cartItems.map((product) => (
-            <CartItem
-              key={product.productId}
-              product={product}
-              onDeleteProductFromCart={handleDeleteProductFromCart}
-              onQuantityChange={handleQuantityChange}
-            />
+            <Box key={product.productId} className="flex-none">
+              <CartItem
+                product={product}
+                onDeleteProductFromCart={handleDeleteProductFromCart}
+                onQuantityChange={handleQuantityChange}
+              />
+            </Box>
           ))}
         </Stack>
       </Stack>
