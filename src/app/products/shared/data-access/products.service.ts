@@ -1,10 +1,11 @@
 import { IProduct } from './products.models';
 
+const API_URL = import.meta.env.VITE_API_URL;
+// await fetch('https://61898893be95487994abc2d8b4cf839e.api.mockbin.io/')
+
 export const productsService = {
   getProducts: async (): Promise<IProduct[]> => {
-    return (
-      await fetch('https://61898893be95487994abc2d8b4cf839e.api.mockbin.io/')
-    ).json();
+    return (await fetch(`${API_URL}/products`)).json();
   },
 
   // mocked implementation since the GET/{id} endpoint doesn't exist
